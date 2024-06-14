@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = require('./models/User');
 const Post = require('./models/Post');
 const bcrypt = require('bcryptjs');
+const dotenv=require('dotenv').config();
 const app = express();
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
@@ -11,14 +12,14 @@ const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
-var salt = bcrypt.genSaltSync(10);
-var secret='fsfasdgagwawh2u33b2br';
+const salt = bcrypt.genSaltSync(10);
+const secret=process.env.JWT_SECRET;
 app.use(cors({credentials:true,origin:'http://localhost:5173'}));
 //{credentials:true,origin:'http://localhost:5173'}
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads',express.static(__dirname+'/uploads'));
-mongoose.connect('mongodb+srv://raghavkhandelwal13122003:IFsmL2DSm5wDK1KG@cluster0.mkemrd0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect(process.env.MONGODB_URL);
  
 
 app.post('/register',async (req,res)=>{

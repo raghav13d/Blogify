@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../userContext";
 
+const API_BASE_URL = import.meta.env.BACKEND_URL
 
 
 const Header=()=>{
   const {setUserInfo,userInfo}=useContext(UserContext);
   useEffect(()=>{
-    fetch('http://localhost:4000/profile',{
+    fetch(`${API_BASE_URL}/profile`,{
       credentials:'include',
     }).then(response=>{
       response.json().then(userInfo=>{
@@ -17,7 +18,7 @@ const Header=()=>{
    },[]);
 
    function logout(){
-    fetch('http://localhost:4000/logout',{
+    fetch(`${API_BASE_URL}/logout`,{
       credentials:'include',
       method:'POST'
     })

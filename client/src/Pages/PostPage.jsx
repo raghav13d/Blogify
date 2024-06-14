@@ -2,12 +2,14 @@ import { formatISO9075 } from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../userContext";
+
+const API_BASE_URL = import.meta.env.BACKEND_URL
 const PostPage=()=>{
     const [postInfo,setPostInfo]=useState(null);
     const {userInfo} =useContext(UserContext); 
     const {id}=useParams();
     useEffect(()=>{
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`${API_BASE_URL}/post/${id}`)
         .then(response=>{
             response.json().then(postInfo=>{
                 setPostInfo(postInfo);
