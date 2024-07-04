@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "../components/Post";
-const API_BASE_URL = import.meta.env.BACKEND_URL
+import { UserContext } from "../userContext";
 
 const IndexPage=()=>{
     const [posts,setPosts]=useState([]);
+    const {url}=useContext(UserContext)
     useEffect(()=>{
-        fetch(`${API_BASE_URL}/post`).then(response=>{
+        fetch(url+'/post').then(response=>{
             response.json().then(posts=>{
                 setPosts(posts);
             });

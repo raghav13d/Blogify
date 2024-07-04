@@ -3,13 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../userContext";
 
-const API_BASE_URL = import.meta.env.BACKEND_URL
 const PostPage=()=>{
     const [postInfo,setPostInfo]=useState(null);
-    const {userInfo} =useContext(UserContext); 
+    const {userInfo,url} =useContext(UserContext); 
     const {id}=useParams();
     useEffect(()=>{
-        fetch(`${API_BASE_URL}/post/${id}`)
+        fetch(`${url}/post/${id}`)
         .then(response=>{
             response.json().then(postInfo=>{
                 setPostInfo(postInfo);

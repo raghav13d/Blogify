@@ -2,16 +2,16 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../userContext";
-const API_BASE_URL = import.meta.env.BACKEND_URL
 
 const LoginPage=()=>{
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
     const [redirect,setRedirect]=useState(false);
     const {setUserInfo}=useContext(UserContext);
+    const {url} =useContext(UserContext);
     async function handleSubmit(ev){
         ev.preventDefault();
-        const response=await fetch(`${API_BASE_URL}/login`,{
+        const response=await fetch(url+'/api/user/login',{
         method:'POST',
         body:JSON.stringify({username,password}),
         headers:{'Content-Type':'application/json'},

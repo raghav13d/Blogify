@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-const API_BASE_URL = import.meta.env.BACKEND_URL
+import React, { useContext, useState } from "react";
+import { UserContext } from "../userContext";
 
 const RegisterPage=()=>{
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
+    const {url} =useContext(UserContext)
     async function handleSubmit(ev){
         ev.preventDefault();
-        const response=await fetch(`${API_BASE_URL}/register`,{
+        const response=await fetch(url+'/api/user/register',{
         method:'POST',
         body:JSON.stringify({username,password}),
         headers:{'Content-Type':'application/json'},
