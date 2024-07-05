@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import {formatISO9075} from 'date-fns';
 import { Link } from "react-router-dom";
+import {UserContext} from '../userContext'
 const  Post=({_id,title,summary,content,cover,createdAt,author})=>{
+    const {url}=useContext(UserContext);
     return(
         <div className='post'>
         <div className='image'>
           <Link to={`/post/${_id}`}>
-            <img src={'http://localhost:4000/'+cover} alt=''></img>
+            <img src={url+'/'+cover} alt=''></img>
           </Link>
         
         </div>
